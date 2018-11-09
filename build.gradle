@@ -1,0 +1,66 @@
+//配置此项目的子项目。
+//
+/**
+ * 此方法针对此项目的每个子项目执行给定的闭包。
+ * 目标Project作为闭包的委托传递给闭包
+ */
+/*subprojects {
+
+}*/
+/**
+ * buildscript中的声明是gradle脚本自身需要使用的资源
+ * 可以声明的资源包括依赖项、第三方插件、maven仓库地址等
+ */
+buildscript {
+    //ext是自定义属性
+    ext {
+        springBootVersion = '2.1.0.RELEASE'
+    }
+    //顾名思义就是仓库的意思啦，而jcenter()、maven()和google()就是托管第三方插件的平台
+    repositories {
+        jcenter()
+    }
+    /**
+     * 当然配置了仓库还不够，我们还需要在dependencies{}里面的配置里，把需要配置的依赖用classpath配置上
+     * 因为这个dependencies在buildscript{}里面，所以代表的是Gradle需要的插件
+     */
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")//引用自定义属性值
+        //classpath("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
+    }
+}
+//这种叫做引入Gradle插件
+apply plugin: 'groovy'//编译grovvy插件
+apply plugin: 'java'//java插件
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+//项目信息
+group = 'com.lzc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+compileGroovy {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-implicit:class' //<< '-Xlint:unchecked' << '-Xlint:deprecation'
+}
+
+repositories {
+    jcenter()
+}
+
+//
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    //<!-- Restful API接口说明 生成  swagger  -->
+    compile "io.springfox:springfox-swagger2:2.7.0"
+    compile "io.springfox:springfox-swagger-ui:2.7.0"
+    /*compile "io.springfox:springfox-swagger2:2.5.0"
+    compile "io.springfox:springfox-swagger-ui:2.5.0"*/
+    //测试
+    testCompile "junit:junit"
+    //grovvy
+    compile 'org.codehaus.groovy:groovy:2.5.1'
+
+}
