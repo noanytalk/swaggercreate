@@ -1,11 +1,13 @@
 package com.lzc.demo.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+
+/**
+ * @author 2018/11/11
+ * 实体类
+ */
 
 public class User {
     private static final Map<Integer,User> users = new HashMap<>();

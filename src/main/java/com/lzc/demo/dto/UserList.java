@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * @author lzc 2018/11/11
+ * @param <T> 泛型
+ * 用于数据返回带分页信息的通用包装类
+ */
 public class UserList<T> {
     public List<T> records;
     public Integer pageNumber;

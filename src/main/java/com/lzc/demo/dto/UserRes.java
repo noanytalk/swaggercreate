@@ -4,6 +4,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.beans.BeanUtils;
 
+/**
+ * @author lzc 2018/11/11
+ * 用于数据返回的包装类
+ */
 @ApiModel("用户信息返回")
 public class UserRes {
     @ApiModelProperty("用户id")
