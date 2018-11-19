@@ -25,11 +25,13 @@ public class TestController {
     @ApiOperation(value = "查询用户信息")//说明该方法是进行说明操作的
     @PostMapping("me")
     public UserRes getUser(@RequestBody UserReq req) {
+
         Optional<User> optional = User.getUsers().values().stream().distinct().filter(user -> user.getId() != null && user.getId().equals(req.getId())).findAny();
         if (!optional.isPresent()) {
             return new UserRes();
         }
         return new UserRes(optional.orElseGet(() -> new User()));
+
     }
 
     @ApiOperation(value = "查询所有用户信息列表")
