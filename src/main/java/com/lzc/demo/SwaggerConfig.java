@@ -45,10 +45,12 @@ public class SwaggerConfig {
          * 定义相应响信息
          */
         Map<String, Header> headerMap = new HashMap<>();
-        //400为错误码，要在swagger显示错误码和错误信息
+        //在Response Messages上显示
         headerMap.put("X-Error-Code", new Header("错误码", "", new ModelRef("String")));
         headerMap.put("X-Error-Message", new Header("错误消息", "", new ModelRef("String")));
-        //有疑问？？？
+        //问题已经解决
+        //200为正常，就是在swagger API的Response Messages上不显示相应头信息，所以第四个参数为空Collections.emptyMap()
+        //400为异常，要在swagger API的Response Messages上显示错误码和错误信息，所以第四个参数为headerMap
         List<ResponseMessage> messages = Lists.newArrayList(
                 new ResponseMessage(200, "OK", new ModelRef("void"), Collections.emptyMap(), Collections.emptyList()),
                 new ResponseMessage(400, "Bad Request", new ModelRef("void"), headerMap, Collections.emptyList())
